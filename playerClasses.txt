@@ -1,0 +1,4 @@
+characterType,ChronoEnergy,TimeStability,luck,Sociability
+Custodian,90,100,9,4
+Professor,100,100,4,9
+Engineer,120,100,6,6
