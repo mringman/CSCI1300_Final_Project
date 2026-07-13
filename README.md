@@ -12,7 +12,13 @@ Temporal Collapse is a text-based adventure game where a prototype time machine 
 
 ## How to compile and run
 
-(TBA)
+Compile:
+
+g++ -Wall -Werror -Wpedantic main.cpp player.cpp character.cpp NPC.cpp era.cpp -o game
+
+Run:
+
+./game
 
 ## How to play
 
