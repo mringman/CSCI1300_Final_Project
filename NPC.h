@@ -10,6 +10,7 @@ class NPC : public Character {
         string dialogue;
         string quest;
         string reward;
+        bool talkedTo;
     
         public:
             NPC();
@@ -24,6 +25,8 @@ class NPC : public Character {
             void setReward(string r);
 
             void speak();
+            bool getTalkedTo();
+            void setTalkedTo(bool talked);
 
             void displayInfo() const;
 

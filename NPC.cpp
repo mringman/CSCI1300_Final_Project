@@ -8,12 +8,14 @@ NPC::NPC() : Character("Unknown NPC", 100){
     dialogue = "Hello traveler.";
     quest = "No quest available.";
     reward = "No reward.";
+    talkedTo = false;
 }
 
 NPC::NPC(string n, int h, string d, string q, string r) : Character(n, h){
     dialogue = d;
     quest = q;
     reward = r;
+    talkedTo = false;
 }
 
 string NPC::getDialogue(){
@@ -38,6 +40,12 @@ void NPC::setReward(string r){
 
 void NPC::speak(){
     cout << name << ": " << dialogue << endl;
+}
+bool NPC::getTalkedTo(){
+    return talkedTo;
+}
+void NPC::setTalkedTo(bool talked){
+    talkedTo = talked;
 }
 
 void NPC::displayInfo() const{

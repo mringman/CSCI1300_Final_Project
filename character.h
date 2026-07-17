@@ -19,7 +19,8 @@ class Character{
         void setName(string n);
         void setHealth(int h);
 
-        virtual void displayInfo() const;
+        void displayInfo() const;
+
 
 };
 

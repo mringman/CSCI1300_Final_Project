@@ -28,6 +28,39 @@ void Era::setComponentFound(bool found){
 void Era::addSubLocation(string location){
     subLocations.push_back(location);
 }
+void Era::addNPC(NPC npc) {
+    npcs.push_back(npc);
+}
+void Era::markNPCTalkedTo(string npcName){
+    for (size_t i = 0; i < npcs.size(); i++){
+        if (npcs[i].getName() == npcName) {
+            npcs[i].setTalkedTo(true);
+        }
+    }
+}
+
+void Era::displayNPCs(){
+    cout << "Characters: " << endl;
+    
+    if (npcs.size() == 0){
+        cout << "None" << endl;
+    }
+    else{
+        for (size_t i = 0; i < npcs.size(); i++) {
+            cout << "- " << npcs[i].getName() << endl;
+
+            if (npcs[i].getTalkedTo()){
+                cout << "  ~ Talked to" << endl;
+                cout << "  ~ Quest: " << npcs[i].getQuest() << endl;
+                cout << "  ~ Reward: " << npcs[i].getReward() << endl;
+            }
+            else{
+                cout << "  ~ Not Yet Met";
+            }
+            cout << endl;
+        }
+    }
+}
 void Era::displayEra(){
     cout << "Era: " << eraName << endl;
     cout << "Locations: " << endl;
@@ -35,6 +68,9 @@ void Era::displayEra(){
     for (size_t i = 0; i < subLocations.size(); i++){
         cout << i + 1 << ". " << subLocations[i] << endl;
     }
+
+    cout << endl;
+    displayNPCs();
 
     if (componentFound) {
         cout << "Component Status: Found" << endl;
