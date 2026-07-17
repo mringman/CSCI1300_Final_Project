@@ -1,35 +1,213 @@
-Theme:
-Temporal collapse: A prototype time machine collapeses, ripping the stability components through time. The player must carefully navigate each era and bring back the lost pieces.
+# Project Description
 
-Planned Classes:
-Characters/players Class - stores player stats, inventory, Chrono Energy, and time stability
-Map Class - stores maps for each era and displays them
-Special Items Class - stores special items and activates unique effects when used
-NPC Class - creats and saves names for each NPC the player will interact with, along with quests and rewards, and dialogue.
-Era Class - stores sublocations, NPCs, Special Items, and completed quests
+## Theme
 
-Planned Limited Resource:
-Chrono Energy - Each jump player makes in time, and every major action uses energy. If Chrono Energy reaches 0, the time machine shuts off, stranding the character in the era.
+**Temporal Collapse** is a single-player, text-based adventure game set inside a research laboratory where a prototype time machine has malfunctioned. The accident sends three important stability components into different periods of history and opens unstable portals throughout time.
 
-Plan for Handling Time:
-Each major action, such as traveling to an era, searching an area, or completing a quest, advances the time counter. Player has limited number of turns before time collapses.
+The player chooses a member of the research team and travels to Ancient Egypt, the Wild West, and the year 2352. In each era, the player must explore locations, interact with characters, complete quests, and recover one missing component.
 
-Any EC you Hope to Accomplish (and descriptions of how you plan to implement the EC option):
-I plan to create a weighted route planning - traveling to different periods of time takes more or less energy, and within each time period, the character can choose different paths.
-I plan to create a Save/Load game button for the user to save and come back to a game.
+The game translates the original Stardew Valley project requirements into a time-travel setting:
 
+- The final Community Center bundle becomes the collection of three missing time-machine components.
+- Stardew Valley locations become different eras and their sublocations.
+- Villagers become historical and futuristic NPCs.
+- The JojaMart shortcut becomes the option to use dishonest or illegal methods.
+- The season time limit becomes Time Stability.
+- Energy is represented by Chrono Energy.
 
-Your Tradeoff System (such as JojaMart and the benefits of using JojaMart instead of other options):
-The player can either go the honest route: compelte quests to earn money, trade, or help characters. OR the fast route, steal, bribe, and force their way through each era, which saves Chrono Energy, but lowers time stability. (I know if they interact more with characters, then theoreitcally this may disrupt the timeline, but its just a game so its ok) a higher timeline stability leads to a better ending
+## Classes
 
+### Character Class
 
-What Mapping Style you Plan to use (just a description of what you want your map to look like is fine):
-I plan to have 5 major locations (Labratory - Main Hub for tavel; Egypt; Wild West; 1980s; The future 2352) each of these will have 3 sub locations 
-Labratory - (Portals, Work Bench, and Changing Room)
-Egypt - (Crip, Worship center, market)
-Wild West - (Gold Mine, Town, Creepy Shack)
-1980s - (Labratory, Warehouse, Cafeteria)
-The future 2352 - (Quantum Research Center, AI workshop, Park)
+    The `Character` class is the base class for both players and NPCs.
 
-The Win/Lose Condition:
-The player wins by collecting all 4 lost items and repairing the time machine. The ending is dependednt on the players Time Stability. If its high, theres a low chance of malfunction, but if its low, theres a high chance of malfunction resulting in the player being sucked into a random era.
+    It stores:
+
+    - Character name
+    - Character health
+
+    The `Player` and `NPC` classes inherit from the `Character` class.
+
+### Player Class
+
+    The `Player` class stores the player's important information and resources.
+
+    It stores:
+
+    - Player name
+    - Character type
+    - Chrono Energy
+    - Time Stability
+    - Luck
+    - Sociability
+    - Inventory
+
+    Luck affects random events during risky routes. Sociability can help the player persuade characters during honest routes. The inventory stores each recovered stability component.
+
+### NPC Class
+
+    The `NPC` class represents the non-player characters encountered throughout the game.
+
+    It stores:
+
+    - NPC name and health inherited from `Character`
+    - Dialogue
+    - Quest information
+    - Reward information
+    - Whether the NPC has been encountered
+
+    NPCs can provide quests, hints, rewards, access to restricted locations, and assistance recovering components.
+
+### Era Class
+
+    The `Era` class represents a major location in the game.
+
+    It stores:
+
+    - Era name
+    - Sublocations
+    - NPC objects
+    - Whether the missing component has been recovered
+
+    The `Era` class stores a vector of `NPC` objects. This allows each era to keep track of its own characters and display their encounter and quest information.
+
+## Limited Resources
+
+### Time Stability
+
+Time Stability is the required time limit for the game. It represents how stable the timeline remains after the time-machine accident.
+
+Traveling through portals and making dangerous choices can lower Time Stability. If it reaches zero, the timeline collapses and the player loses.
+
+The amount of Time Stability remaining also affects the final attempt to repair the time machine. Finishing with high Time Stability gives the player a greater chance of successfully restoring the timeline.
+
+### Chrono Energy
+
+    Chrono Energy is the additional limited resource beyond time.
+
+    The player uses Chrono Energy when:
+
+    - Traveling through a portal
+    - Exploring locations
+    - Completing quests
+    - Planning risky actions
+    - Recovering components
+    - Failing certain challenges
+
+    If Chrono Energy reaches zero, the time machine shuts down and the player becomes stranded in time.
+
+## Handling Time
+
+The game handles time through the player's Time Stability value rather than through numbered days.
+
+Major actions and portal travel reduce Time Stability. Risky or illegal decisions can reduce it more quickly than honest decisions. This gives the player a limited number of actions before the timeline collapses.
+
+The player must decide how much exploration and risk they can afford before returning to the laboratory.
+
+## Tradeoff System
+
+The game's Joja-style tradeoff system allows the player to choose between honest and risky routes.
+
+### Honest Routes
+
+    The honest routes usually require the player to:
+
+    - Talk to multiple NPCs
+    - Complete quests
+    - Help people
+    - Repair equipment
+    - Earn trust
+    - Receive permission to enter restricted locations
+
+    These routes may require more Chrono Energy because they involve additional actions, but they usually preserve more Time Stability.
+
+### Risky Routes
+
+    The risky routes may involve:
+
+    - Stealing
+    - Robbery
+    - Illegal entry
+    - Smuggling
+    - Hacking security systems
+    - Working with suspicious characters
+
+    These routes can allow the player to reach the component more quickly, but they may cost additional Chrono Energy, lower Time Stability, trigger random challenges, or cause guards and security systems to become suspicious.
+
+    The player must decide whether saving actions is worth the added danger.
+
+## Map and Location Style
+
+The laboratory acts as the main hub of the game. From the laboratory, the player can enter portals leading to three eras.
+
+### Laboratory
+
+    - Time Portals
+    - Repair Workbench
+
+### Ancient Egypt
+
+    - Crypt
+    - Worship Center
+    - Market
+
+    The player must recover the Scarab of the Endless Dawn. The player can earn the priests' trust by helping the market or attempt to steal the scarab with Seti.
+
+### Wild West
+
+    - Gold Mine
+    - Town Saloon
+    - Old Man Jankins' Cabin
+
+    The player must recover the Temporal Cog from a collapsed mine. The player can cooperate with the sheriff or work with Wade Blackwell to steal mining equipment.
+
+### Future 2352
+
+    - Quantum Research Center
+    - AI Workshop
+    - Neon Gardens
+
+    The player must recover the Quantum Stabilizer Core. The player can repair the facility AI and earn legal clearance or work with Nyx to break into the Research Center.
+
+    Each era displays its sublocations, characters, and component-recovery status through the terminal interface.
+
+## Main Objective
+
+The player must recover these three missing stability components:
+
+1. Scarab of the Endless Dawn
+2. Temporal Cog
+3. Quantum Stabilizer Core
+
+After recovering all three components, the player must return to the laboratory and approach the Repair Workbench.
+
+The collected components act as the equivalent of the final Community Center bundle.
+
+## Win and Lose Conditions
+
+### Win Condition
+
+    The player wins by:
+
+    1. Recovering all three missing components
+    2. Returning to the laboratory
+    3. Installing the components at the Repair Workbench
+    4. Successfully stabilizing the timeline
+
+    The final repair uses the player's remaining Time Stability to determine the chance of success. A Time Stability value of 80 or higher guarantees a successful repair.
+
+### Lose Conditions
+
+    The player loses if:
+
+    - Chrono Energy reaches zero
+    - Time Stability reaches zero
+    - The final repair attempt fails
+
+    If the final repair fails, the time machine is destroyed and the player is trapped in a randomly selected era.
+
+## Extra Credit
+
+None.
+
+Weighted route planning and a save/load system were included in the original plan, but they were not implemented as part of the final version.
